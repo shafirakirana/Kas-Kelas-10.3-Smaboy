@@ -40,11 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const daftarSiswa = [
         "Ahmad Faishal", "Airell Rahagi", "Aqila Zahra", "Arum Fitria", "Azka Dhiafin",
-        "Bagus Adi", "Bevan Zacky", "Chantīka Putri", "Dea Anindya", "Devita Ayu",
+        "Bagus Adi", "Bevan Zacky", "Chantika Putri", "Dea Anindya", "Devita Ayu",
         "Dewi Natasya", "Dimas Prasetia", "Fania Dinda", "Fardanu Maulana", "Hima Danara",
         "Intan Nurin", "Jeniva Aurora", "Jensina Natalia", "Kania Tanazza", "Khalisha Zidna",
         "Livia Mozza", "Mahawira Naocko", "M. Hasan", "M. Fikri", "Nico Maulidan",
-        "Nur Azizah", "Ozzil Nayotama", "Pegy Pramitha", "Radingga Deega", "Sanjaya Ade",
+        "Nur Azizah", "Ozzil Nayotama", "Pegy Pramitha", "Radingga Deeja", "Sanjaya Ade",
         "Sanshita Pramesti", "Shafira Kirana", "Titah Amelia", "Yeisha Kristantyo", "Zahra Almaira", "Zaskia Jelita"
     ];
 
