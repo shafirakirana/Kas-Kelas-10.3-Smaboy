@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kas Kelas 10.3 Smaboy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kas_style.css">
+</head>
+  
+<body>
+<h1>KAS KELAS 10.3 SMABOY</h1>
+<p class="quote">"maka wajib hukumnya membayar kas bagi mereka yang berada di kelas X-3"<br>
+  - shafira kirana 2026</p>
+  <div class="opsi">
+    <a id="poin" href="kasbulan.html"> Kas Kelas - Cek Kas</a>
+    <a href="pengeluaran.html">Pengeluaran dan Pemasukan</a>
+    <a href="urunan.html">Keperluan Bersama</a>
+    <button>Login as Bendahara</button>
+  </div>
+  <footer>
+    <p>✦ 10.3 SMABOY ✦</p>
+    <span>"Insyaallah 2027 beli ac <br> (PRENGGGGG)"</span>
+    <small>© shrra 2026</small>
+  </footer>
+<div id="modalPin" class="modal-overlay">
+  <div class="modal-box">
+    <h3>AKSES BENDAHARA</h3>
+    <p>Masukkan PIN</p>
+
+    <input type="password" id="inputPin" placeholder="••••••" maxlength="6">
+
+    <div id="pesanErrorPin" class="pesan-error">PIN salah!</div>
+
+    <div class="modal-buttons">
+      <button id="btnBatalModal" class="btn-batal">Batal</button>
+      <button id="btnMasukModal" class="btn-masuk">Masuk</button>
+    </div>
+  </div>
+</div>
+<div id="modalLogout" class="modal-overlay">
+  <div class="modal-box">
+    <h3>LOGOUT BENDAHARA</h3>
+    <p>Kamu saat ini dalam mode Bendahara. Yakin ingin keluar?</p>
+    <div class="modal-buttons">
+      <button id="btnBatalLogout" class="btn-batal">Batal</button>
+      <button id="btnYaLogout" class="btn-masuk" style="background: #ff4d4d; color: #fff;">Logout</button>
+    </div>
+  </div>
+</div>
+
+  <script src="first_page.js"></script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+ body {
+    background-color: #081F5C;
+    margin: 0;
+    padding: 30px 20px;
+    background-image:
+        radial-gradient(circle at 0% 0%, rgba(70,110,180,0.8), transparent 30%),
+        radial-gradient(circle at 100% 40%, rgba(50,85,150,0.7), transparent 35%),
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: auto, auto, 35px 35px, 35px 35px;
+}
+
+h1 {
+    color: #D8E6F2;
+    text-align: center;
+    font-family: 'Playfair', serif;
+    font-size: 48px;
+    margin: 0 0 15px 0;
+    }
+
+p {
+  color : #E7E2CE;
+  font-size : 15px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.12);
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    margin-bottom: 15px;
+    font-family: 'Playfair', serif;
+}
+
+.quote {
+    text-align: center;
+    margin-top: -5px;
+}
+
+.opsi {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.opsi a,
+.opsi button {
+  background-color: #C8D9E6;
+  border: 2px solid #4B6B7C;
+  padding: 10px 20px;
+  border-radius: 18px;
+  width: 85%;
+  max-width: 500px;
+  height: 65px;
+  box-sizing: border-box;
+
+  color: #17233d;
+  font-size: 18px;
+  font-family: Playfair;
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.opsi a:visited {
+  color: #17233d;
+}
+
+.opsi a:hover {
+  color: #17233d;
+}
+
+.opsi a:active {
+  color: #17233d;
+  transform: scale(0.97);
+}
+
+.opsi a {
+  -webkit-tap-highlight-color: rgba(0, 100, 255, 0.2);
+}
+
+.opsi button:active {
+  transform: scale(0.97);
+}
+
+footer {
+    text-align: center;
+    color: #dce5f2;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+footer p {
+    font-size: 18px;
+}
+
+footer span {
+    display: block;
+    font-style: italic;
+    font-size: 14px;
+    margin: 15px 0;
+}
+
+footer small {
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(8, 31, 92, 0.6);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-box {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 30px 25px;
+  width: 85%;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active .modal-box {
+  transform: scale(1);
+}
+
+.modal-box h3 {
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+
+.modal-box p {
+  color: #a5c0ee;
+  font-size: 12px;
+  background: none;
+  padding: 0;
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.modal-box input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: 6px;
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.modal-box input:focus {
+  border-color: #4cc9f0;
+  box-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.btn-batal {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.btn-masuk {
+  background: #4cc9f0;
+  color: #081F5C;
+  box-shadow: 0 0 12px rgba(76, 201, 240, 0.4);
+}
+
+.btn-masuk:active, .btn-batal:active {
+  transform: scale(0.95);
+}
+
+.pesan-error {
+  color: #ff4d4d;
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 16px;
+  display: none;
+  animation: shake 0.3s ease;
+}
+
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}

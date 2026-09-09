@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keperluan Kelas 10.3</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="keuanganstyle.css">
+    <link rel="stylesheet" href="urunan.css">
+    <style>
+        .card-event {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+        }
+        .event-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .event-sub {
+            font-size: 12px;
+            color: #38ef7d;
+        }
+        .list-siswa-urunan {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            max-height: 250px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .item-siswa-urunan {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 8px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #fff;
+        }
+        .btn-check-urunan {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border-radius: 6px;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-check-urunan.lunas {
+            background: #10b981;
+            border-color: #34d399;
+        }
+    </style>
+</head>
+<body>
+    <a href="kaskelas.html" class="kembali">← Kembali</a>
+    <h1 class="judul">KEPERLUAN KELAS</h1>
+    <p class="sub-judul">Acara dan Urunan Khusus 10.3</p>
+
+    <!-- Form Buat Event -->
+    <div id="formContainer" class="form-card" style="display: none;">
+        <h3>+ BUAT EVENT URUNAN BARU</h3>
+        <form id="formBuatEvent">
+            <div class="input-group">
+                <input type="text" id="namaEvent" placeholder="Nama Event (Misal: Beli LKS Matematika)" required autocomplete="off">
+            </div>
+            <div class="input-group">
+                <input type="text" id="targetNominal" placeholder="Nominal per Siswa (Rp)" required autocomplete="off">
+            </div>
+            <button type="submit" class="btn-simpan">Buat Event Urunan</button>
+        </form>
+    </div>
+
+    <!-- Container Daftar Event -->
+    <div id="containerEvent"></div>
+
+    <!-- Custom Modal Konfirmasi -->
+    <div id="customModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 id="modalTitle">Konfirmasi</h3>
+            <p id="modalMessage">Apakah Anda yakin?</p>
+            <div class="modal-actions">
+                <button type="button" id="btnModalBatal" class="btn-modal-batal">Batal</button>
+                <button type="button" id="btnModalOk" class="btn-modal-ok">Ya, Lanjutkan</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="urunan_js.js"></script>
+</body>
+</html>

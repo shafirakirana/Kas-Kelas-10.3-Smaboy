@@ -1,0 +1,62 @@
+body {
+    background-color: #081F5C;
+    margin: 0;
+    padding: 30px 20px;
+    background-image:
+        radial-gradient(circle at 0% 0%, rgba(70,110,180,0.8), transparent 30%),
+        radial-gradient(circle at 100% 40%, rgba(50,85,150,0.7), transparent 35%),
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: auto, auto, 35px 35px, 35px 35px;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+.kembali { color: white; text-decoration: none; font-size: 14px; opacity: 0.8; }
+.judul { text-align: center; font-size: 24px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-top: 10px; }
+.sub-judul { text-align: center; color: rgba(255, 255, 255, 0.5); font-size: 12px; margin-bottom: 20px; }
+
+
+.ringkasan-container { max-width: 500px; margin: 0 auto 20px auto; }
+.card-stat { background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px; padding: 18px; text-align: center; }
+.stat-label { font-size: 11px; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 1px; }
+.card-stat h3 { margin: 6px 0 0 0; font-size: 26px; color: #FFF; font-weight: 700; }
+
+.form-card { max-width: 500px; margin: 0 auto 25px auto; background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px; padding: 20px; box-sizing: border-box; }
+.form-card h3 { margin-top: 0; font-size: 13px; letter-spacing: 1px; color: #a5c0ee; text-align: center; margin-bottom: 16px; }
+
+
+.tipe-switch { display: flex; gap: 10px; margin-bottom: 15px; background: rgba(0, 0, 0, 0.25); padding: 5px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); }
+.tipe-switch input[type="radio"] { display: none; }
+.tipe-switch label { flex: 1; text-align: center; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; color: rgba(255, 255, 255, 0.6); }
+
+#tipePemasukan:checked + .label-pemasukan { background: #2ec4b6; color: #081F5C; font-weight: 700; box-shadow: 0 4px 12px rgba(46, 196, 182, 0.3); }
+#tipePengeluaran:checked + .label-pengeluaran { background: #e71d36; color: white; font-weight: 700; box-shadow: 0 4px 12px rgba(231, 29, 54, 0.3); }
+
+.input-group { margin-bottom: 12px; }
+.input-group input { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.2); color: white; outline: none; box-sizing: border-box; font-family: 'Poppins'; font-size: 13px; }
+.input-group input::placeholder { color: rgba(255, 255, 255, 0.4); }
+
+.btn-simpan { width: 100%; padding: 12px; background: #EDE7e0; border: none; border-radius: 10px; color: #081F5C; font-weight: 700; font-size: 14px; cursor: pointer; transition: 0.2s; }
+.btn-simpan:active { transform: scale(0.98); }
+
+.akses-bendahara { display: none; }
+
+.tabel-container { max-width: 500px; margin: 0 auto; }
+.tabel-container h3 { font-size: 13px; color: rgba(255, 255, 255, 0.7); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+.item-transaksi { display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.12); padding: 12px 16px; border-radius: 12px; margin-bottom: 8px; }
+.item-info .ket { font-weight: 500; font-size: 14px; display: block; color: #ffffff; }
+.item-info .tgl { font-size: 10px; color: rgba(255, 255, 255, 0.4); }
+.nominal.pemasukan { color: #2ec4b6; font-weight: 600; font-size: 14px; }
+.nominal.pengeluaran { color: #ff6b6b; font-weight: 600; font-size: 14px; }
+.btn-hapus { background: none; border: none; color: rgba(255, 255, 255, 0.4); cursor: pointer; font-size: 14px; margin-left: 12px; padding: 2px 6px; }
+.btn-hapus:hover { color: #ff4d4d; }
+
+.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; }
+.modal-card { background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px; padding: 20px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.modal-card h4 { margin: 0 0 8px 0; font-size: 16px; color: white; }
+.modal-card p { font-size: 12px; color: rgba(255, 255, 255, 0.6); margin: 0 0 20px 0; }
+.modal-buttons { display: flex; gap: 10px; }
+.modal-buttons button { flex: 1; padding: 10px; border-radius: 8px; border: none; font-weight: 600; font-size: 13px; cursor: pointer; }
+.btn-batal { background: rgba(255, 255, 255, 0.15); color: white; }
+.btn-hapus-konfirm { background: #ff4d4d; color: white; }

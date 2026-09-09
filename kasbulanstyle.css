@@ -1,0 +1,311 @@
+body {
+background-color: #081F5C;
+    margin: 0;
+    padding: 30px 20px;
+    background-image:
+        radial-gradient(circle at 0% 0%, rgba(70,110,180,0.8), transparent 30%),
+        radial-gradient(circle at 100% 40%, rgba(50,85,150,0.7), transparent 35%),
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: auto, auto, 35px 35px, 35px 35px;
+  font-family: "Poppins";
+}
+
+.kembali {
+    color: white;
+    text-decoration: none;
+}
+
+  .judul {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #ffffff 0%, #a5c0ee 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 8px rgba(76, 201, 240, 0.3));
+    margin-top: 10px;
+}
+
+.sub-judul {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-top: 4px;
+    font-weight: 400;
+}
+
+
+.search {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 10px 20px;
+}
+
+.search {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(12px);            
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;                    
+    padding: 10px 20px;
+    margin: 25px auto 20px;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.search:focus-within {
+    border-color: #1B263B;
+    box-shadow: 0 0 15px #2F4156;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.search input {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #ffffff;             
+    width: 90%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.search input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.search .material-symbols-outlined {
+    color: #FFF;             
+    font-size: 20px;
+}
+
+.search input {
+    border: none;
+    outline: none;
+    font-size: 15px;
+    width: 85%;
+}
+
+.bulan {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: white;
+    margin: 25px 0;
+}
+
+.bulan button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 25px;
+}
+
+
+.baris button {
+    border-color: #1B263B;
+}
+
+
+.tabel {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    color: #17233d;
+    overflow-x: auto;
+}
+
+.baris {
+    display: grid;
+    grid-template-columns: 32px 1fr repeat(4, 36px);
+    column-gap: 8px;
+    align-items: center;
+    min-height: 55px;
+    padding: 10px 14px;
+}
+
+
+.baris.header {
+    background-color: #dce7ee;
+    border-radius: 20px;
+    min-height: 45px;
+    font-weight: bold;
+}
+
+.baris.header span.text-center {
+  text-align: center;
+  width: 100%;
+}
+
+.baris:not(.header) {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+}
+
+.baris:not(.header):hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+.baris span {
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.baris span:first-child {
+    font-size: 12px;
+    opacity: 0.6;
+    text-align: center; 
+}
+
+.baris.header span:first-child {
+    color: #17233d; 
+    opacity: 1;    
+    font-weight: 700;
+}
+
+.baris span:nth-child(2) {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.25;
+    text-align: center;      
+    padding: 0 4px;          
+    color: #ffffff;
+}
+
+.baris.header span {
+    color: #17233d;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.baris button {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: transparent;
+    border: 2px solid #7a9cc6;
+    border-radius: 6px;
+    justify-self: center;
+    font-size: 0;
+}
+
+.baris.header {
+    background-color: #e2ebf0;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    margin-bottom: 14px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25); 
+}
+
+.baris button.lunas {
+    background-color: #061c2c !important;
+    border-color: #193347 !important;
+    box-shadow: 0 0 10px #334b80;
+    position: relative;
+}
+
+.baris button.lunas::after {
+    content: '✓';
+    font-size: 13px;
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ringkasan-container {
+    display: flex;
+    gap: 15px;
+    max-width: 650px;
+    margin: 0 auto 20px auto;
+}
+
+.card-stat {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 14px 18px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.card-stat h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.box-centang {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tgl-ket {
+    font-size: 9px;
+    color: #0D1B2A; 
+    margin-top: 2px;
+    font-weight: 500;
+}
+
+.baris button.lunas {
+    background: linear-gradient(135deg, #2F3E4F 0%, #0D1B2A 100%) !important;
+    border: 1px solid #4B6B7C !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 2px 0 !important;
+    border-radius: 10px !important;
+}
+
+.baris button .icon-centang {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.baris button .badge-tgl {
+    font-size: 8px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 2px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
