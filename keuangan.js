@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const database = firebase.database();
 
   const isBendahara = localStorage.getItem('isBendahara') === 'true';
-  const barisSiswa = document.querySelectorAll('table tr:not(.header)');
+  // Menggunakan selector class .baris sesuai HTML
+  const barisSiswa = document.querySelectorAll('.baris');
   const searchInput = document.getElementById('searchInput');
 
   const NOMINAL_PER_MINGGU = 5000;
@@ -94,19 +95,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
 
-          // Hapus listener lama dengan membuat clone tombol
+          // Hapus listener lama dengan mengganti clone tombol
           const newBtn = btn.cloneNode(true);
           btn.parentNode.replaceChild(newBtn, btn);
 
           if (!isBendahara) {
-            // Mode Siswa: Tombol aktif secara visual (bisa tampil centang), tetapi klik dikunci
+            // Mode Siswa: Tombol tetap aktif secara visual agar status centang bisa tampil
             newBtn.disabled = false;
             newBtn.style.cursor = 'default';
-            newBtn.onclick = (e) => {
-              e.preventDefault();
-            };
+            newBtn.onclick = (e) => e.preventDefault();
           } else {
-            // Mode Bendahara: Tombol bisa diklik untuk ubah status di Firebase
+            // Mode Bendahara: Tombol dapat diklik untuk mengubah data di Firebase
             newBtn.disabled = false;
             newBtn.style.cursor = 'pointer';
 
@@ -157,7 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
     searchInput.addEventListener('input', (e) => {
       const keyword = e.target.value.toLowerCase();
       barisSiswa.forEach(baris => {
-        const nama = baris.children[1] ? baris.children[1].textContent.toLowerCase() : '';
+        const spans = baris.querySelectorAll('span');
+        const nama = spans[1] ? spans[1].textContent.toLowerCase() : '';
         baris.style.display = nama.includes(keyword) ? '' : 'none';
       });
     });
