@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Config Firebase milik proyek kas-kelas-smaboy
+  // Konfigurasi Firebase proyek kas-kelas-smaboy
   const firebaseConfig = {
     apiKey: "AIzaSyDDlpRq4J5BWDhgS-0Nm32",
     authDomain: "kas-kelas-smaboy.firebaseapp.com",
@@ -94,23 +94,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
 
-          // Kloning tombol untuk hapus listener lama
+          // Hapus listener lama dengan membuat clone tombol
           const newBtn = btn.cloneNode(true);
           btn.parentNode.replaceChild(newBtn, btn);
 
           if (!isBendahara) {
-            newBtn.disabled = true;
-            newBtn.style.cursor = 'not-allowed';
-            newBtn.style.opacity = '0.8';
+            // Mode Siswa: Tombol aktif secara visual (bisa tampil centang), tetapi klik dikunci
+            newBtn.disabled = false;
+            newBtn.style.cursor = 'default';
+            newBtn.onclick = (e) => {
+              e.preventDefault();
+            };
           } else {
+            // Mode Bendahara: Tombol bisa diklik untuk ubah status di Firebase
             newBtn.disabled = false;
             newBtn.style.cursor = 'pointer';
 
-            newBtn.addEventListener('click', () => {
+            newBtn.onclick = () => {
               const statusLunasSekarang = !newBtn.classList.contains('lunas');
               const tglHariIni = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
 
-              // Simpan langsung ke Firebase Realtime Database
               if (statusLunasSekarang) {
                 database.ref('kas_kelas/' + keyStorage).set({
                   status: true,
@@ -119,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
               } else {
                 database.ref('kas_kelas/' + keyStorage).remove();
               }
-            });
+            };
           }
         });
       });
