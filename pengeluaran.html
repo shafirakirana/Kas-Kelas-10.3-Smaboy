@@ -1,79 +1,61 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keuangan Kas 10.3</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-    <link rel="stylesheet" href="keuanganstyle.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keuangan Kelas</title>
+  <link rel="stylesheet" href="kas_style.css">
+  <link rel="stylesheet" href="kasbulanstyle.css">
 </head>
-<body>
-    <a href="index.html" class="kembali">← Kembali</a>
-    <h1 class="judul">KEUANGAN KELAS</h1>
-    <p class="sub-judul">Arus Pemasukan & Pengeluaran Kas 10.3</p>
+<body style="background: #0f172a; color: white; font-family: sans-serif; padding: 20px;">
 
-    <div class="ringkasan-container">
-        <div class="card-stat">
-            <span class="stat-label">Total Sisa Saldo Kas</span>
-            <h3 id="statSisaSaldo">Rp 0</h3>
-        </div>
-    </div>
+  <a href="index.html" style="color: #94a3b8; text-decoration: none; font-size: 14px;">← Kembali</a>
 
-    <div id="formContainer" class="form-card akses-bendahara">
-        <h3>+ TAMBAH TRANSAKSI</h3>
-        <form id="formTransaksi">
-            
-            <div class="tipe-switch">
-                <input type="radio" id="tipePemasukan" name="tipeTransaksi" value="pemasukan" checked>
-                <label for="tipePemasukan" class="label-pemasukan">+ Pemasukan</label>
-                
-                <input type="radio" id="tipePengeluaran" name="tipeTransaksi" value="pengeluaran">
-                <label for="tipePengeluaran" class="label-pengeluaran">- Pengeluaran</label>
-            </div>
+  <h1 style="text-align: center; margin-top: 15px; margin-bottom: 5px;">KEUANGAN KELAS</h1>
+  <p style="text-align: center; color: #94a3b8; font-size: 14px; margin-bottom: 25px;">Arus Pemasukan & Pengeluaran Kas 10.3</p>
 
-            <!-- INPUT TANGGAL -->
-            <div class="input-group">
-                <input type="date" id="tanggalTransaksi" required>
-            </div>
+  <!-- KARTU TOTAL SALDO -->
+  <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 20px;">
+    <span style="font-size: 12px; color: #94a3b8; letter-spacing: 1px; text-transform: uppercase;">Total Sisa Saldo Kas</span>
+    <h2 id="statSaldoAkhir" style="font-size: 32px; margin: 10px 0 0 0; color: #fff;">Rp 0</h2>
+  </div>
 
-            <div class="input-group">
-                <input type="text" id="keterangan" placeholder="Keterangan (Misal: Beli Es krim)" required autocomplete="off">
-            </div>
-            <div class="input-group">
-                <input type="text" id="nominal" placeholder="Nominal (Rp)" required autocomplete="off">
-            </div>
-            <button type="submit" class="btn-simpan">Simpan Transaksi</button>
-        </form>
-    </div>
+  <!-- FORM TAMBAH TRANSAKSI (Gunakan ID formTransaksi) -->
+  <form id="formTransaksi" style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 12px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1);">
+    <h3 style="margin-top: 0; margin-bottom: 12px; font-size: 16px;">+ Tambah Transaksi Kas</h3>
+    
+    <input type="text" id="keterangan" placeholder="Keterangan (misal: Beli Spidol)" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;" required>
+    
+    <input type="number" id="nominal" placeholder="Nominal (misal: 15000)" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;" required>
+    
+    <select id="tipe" style="width: 100%; padding: 10px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;">
+      <option value="pengeluaran">Pengeluaran (-)</option>
+      <option value="pemasukan">Pemasukan (+)</option>
+    </select>
+    
+    <button type="submit" id="btnSubmit" style="width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+      Simpan Transaksi
+    </button>
+  </form>
 
-    <div class="tabel-container">
-        <h3>Riwayat Transaksi</h3>
-        <div class="tabel" id="daftarTransaksi">
-        </div>
-    </div>
-  
-    <div id="modalHapus" class="modal-overlay">
-        <div class="modal-card">
-            <h4>Hapus Transaksi?</h4>
-            <p>Catatan transaksi ini akan dihapus permanen.</p>
-            <div class="modal-buttons">
-                <button id="btnBatalHapus" class="btn-batal">Batal</button>
-                <button id="btnKonfirmasiHapus" class="btn-hapus-konfirm">Hapus</button>
-            </div>
-        </div>
-    </div>
+  <h3 style="margin-bottom: 15px; font-size: 14px; letter-spacing: 1px; color: #94a3b8; text-transform: uppercase;">Riwayat Transaksi</h3>
 
-    <script src="keuangan.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-    flatpickr("#tanggalTransaksi", {
-        dateFormat: "Y-m-d",
-        defaultDate: "today",
-        disableMobile: "true"
-    });
-</script>
-
+  <!-- TABEL RIWAYAT TRANSAKSI -->
+  <div style="overflow-x: auto;">
+    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+      <thead>
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: #94a3b8; font-size: 14px;">
+          <th style="padding: 10px 5px;">Tgl</th>
+          <th style="padding: 10px 5px;">Ket</th>
+          <th style="padding: 10px 5px;">Jumlah</th>
+        </tr>
+      </thead>
+      <tbody id="tabelTransaksi">
+      </tbody>
+    </table>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <script src="second_page.js"></script>
 </body>
 </html>
