@@ -15,23 +15,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   const database = firebase.database();
 
-  const isBendahara = localStorage.getItem('isBendahara') === 'true';
-
-  // Elemen Form & Input
   const formTransaksi = document.getElementById('formTransaksi');
   const inputKeterangan = document.getElementById('keterangan');
   const inputNominal = document.getElementById('nominal');
-  const selectTipe = document.getElementById('tipe'); // 'pemasukan' atau 'pengeluaran'
-  const btnSubmit = document.getElementById('btnSubmit');
+  const selectTipe = document.getElementById('tipe');
   const tabelTransaksi = document.getElementById('tabelTransaksi');
 
-  // Proteksi Akses Form
-  if (!isBendahara) {
-    if (formTransaksi) formTransaksi.style.display = 'none'; // Sembunyikan form jika siswa biasa
+  // BUKA FORM: Pastikan form selalu terlihat
+  if (formTransaksi) {
+    formTransaksi.style.display = 'block';
   }
 
   // Simpan Transaksi ke Firebase
-  if (formTransaksi && isBendahara) {
+  if (formTransaksi) {
     formTransaksi.addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -50,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
           timestamp: Date.now()
         }).then(() => {
           formTransaksi.reset();
+          alert("Transaksi berhasil disimpan!");
         }).catch((err) => {
           alert("Gagal menyimpan data: " + err.message);
         });
@@ -57,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Muat Data Transaksi secara Realtime
+  // Muat Data Transaksi secara Realtime dari Firebase
   database.ref('transaksi_kas').orderByChild('timestamp').on('value', (snapshot) => {
     if (!tabelTransaksi) return;
 
@@ -76,30 +73,29 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const row = document.createElement('tr');
+      row.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
       row.innerHTML = `
-        <td>${data.tanggal}</td>
-        <td>${data.keterangan}</td>
-        <td style="color: ${data.tipe === 'pemasukan' ? 'green' : 'red'}; font-weight: bold;">
+        <td style="padding: 10px 5px; font-size: 13px;">${data.tanggal}</td>
+        <td style="padding: 10px 5px; font-size: 13px;">${data.keterangan}</td>
+        <td style="padding: 10px 5px; font-size: 13px; color: ${data.tipe === 'pemasukan' ? '#4ade80' : '#f87171'}; font-weight: bold;">
           ${data.tipe === 'pemasukan' ? '+' : '-'} Rp ${data.nominal.toLocaleString('id-ID')}
         </td>
-        ${isBendahara ? `<td><button onclick="hapusTransaksi('${key}')" style="color:red; cursor:pointer;">Hapus</button></td>` : ''}
+        <td style="padding: 10px 5px;"><button onclick="hapusTransaksi('${key}')" style="background: #ef4444; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">Hapus</button></td>
       `;
       tabelTransaksi.appendChild(row);
     });
 
-    // Update Ringkasan Saldo jika ada elemen indikatornya
-    const elPemasukan = document.getElementById('statPemasukan');
-    const elPengeluaran = document.getElementById('statPengeluaran');
+    // Hitung Sisa Saldo
     const elSaldoAkhir = document.getElementById('statSaldoAkhir');
-
-    if (elPemasukan) elPemasukan.textContent = `Rp ${totalPemasukan.toLocaleString('id-ID')}`;
-    if (elPengeluaran) elPengeluaran.textContent = `Rp ${totalPengeluaran.toLocaleString('id-ID')}`;
-    if (elSaldoAkhir) elSaldoAkhir.textContent = `Rp ${(totalPemasukan - totalPengeluaran).toLocaleString('id-ID')}`;
+    if (elSaldoAkhir) {
+      const sisaSaldo = totalPemasukan - totalPengeluaran;
+      elSaldoAkhir.textContent = `Rp ${sisaSaldo.toLocaleString('id-ID')}`;
+    }
   });
 
-  // Fungsi Global Hapus Transaksi (Khusus Bendahara)
+  // Fungsi Hapus Transaksi
   window.hapusTransaksi = (key) => {
-    if (isBendahara && confirm("Hapus transaksi ini?")) {
+    if (confirm("Yakin ingin menghapus transaksi ini?")) {
       database.ref('transaksi_kas/' + key).remove();
     }
   };
