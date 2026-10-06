@@ -4,51 +4,194 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keuangan Kelas</title>
-  <link rel="stylesheet" href="kas_style.css">
-  <link rel="stylesheet" href="kasbulanstyle.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: #0f172a; 
+      color: #f8fafc;
+      padding: 20px 16px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      transition: color 0.2s;
+    }
+    .btn-back:hover { color: #38bdf8; }
+
+    .header-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #f8fafc;
+      margin-bottom: 4px;
+    }
+    .header-subtitle {
+      text-align: center;
+      color: #64748b;
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    .saldo-card {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 24px 20px;
+      text-align: center;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+    .saldo-label {
+      font-size: 11px;
+      color: #94a3b8;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .saldo-value {
+      font-size: 32px;
+      font-weight: 700;
+      margin-top: 8px;
+      color: #ffffff;
+    }
+
+    .form-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+    .form-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #38bdf8;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .custom-input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      background: #0f172a;
+      color: #f8fafc;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .custom-input:focus {
+      border-color: #38bdf8;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 12px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: #1d4ed8; }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .table-container {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th {
+      background: #0f172a;
+      padding: 12px 14px;
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    td {
+      padding: 14px;
+      font-size: 13px;
+      border-bottom: 1px solid #334155;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+  </style>
 </head>
-<body style="background: #0f172a; color: white; font-family: sans-serif; padding: 20px;">
+<body>
 
-  <a href="index.html" style="color: #94a3b8; text-decoration: none; font-size: 14px;">← Kembali</a>
+  <a href="index.html" class="btn-back">← Kembali</a>
 
-  <h1 style="text-align: center; margin-top: 15px; margin-bottom: 5px;">KEUANGAN KELAS</h1>
-  <p style="text-align: center; color: #94a3b8; font-size: 14px; margin-bottom: 25px;">Pemasukan & Pengeluaran Kas 10.3</p>
+  <h1 class="header-title">KEUANGAN KELAS</h1>
+  <p class="header-subtitle">Pemasukan & Pengeluaran Kas 10.3</p>
 
-  <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 20px;">
-    <span style="font-size: 12px; color: #94a3b8; letter-spacing: 1px; text-transform: uppercase;">Total Sisa Saldo Kas</span>
-    <h2 id="statSaldoAkhir" style="font-size: 32px; margin: 10px 0 0 0; color: #fff;">Rp 0</h2>
+  <div class="saldo-card">
+    <span class="saldo-label">Total Sisa Saldo Kas</span>
+    <h2 id="statSaldoAkhir" class="saldo-value">Rp 0</h2>
   </div>
-
-  <form id="formTransaksi" style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 12px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1);">
-    <h3 style="margin-top: 0; margin-bottom: 12px; font-size: 16px;">+ Tambah Transaksi Kas</h3>
-    
-    <input type="text" id="keterangan" placeholder="Keperluan" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;">
-    
-    <input type="number" id="nominal" placeholder="Nominal" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;">
-    
-    <select id="tipe" style="width: 100%; padding: 10px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;">
-      <option value="pengeluaran">Pengeluaran (-)</option>
-      <option value="pemasukan">Pemasukan (+)</option>
-    </select>
-    
-    <button type="submit" id="btnSubmit" style="width: 100%; padding: 12px; background: #2563eb; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
-      Simpan Transaksi
-    </button>
+  
+  <form id="formTransaksi" class="form-card">
+    <h3 class="form-title">+ Tambah Transaksi Kas</h3>
+    <div class="input-group">
+      <input type="text" id="keterangan" placeholder="Keperluan (contoh: Beli Spidol)" class="custom-input">
+      <input type="number" id="nominal" placeholder="Nominal (contoh: 20000)" class="custom-input">
+      <select id="tipe" class="custom-input">
+        <option value="pengeluaran">Pengeluaran (-)</option>
+        <option value="pemasukan">Pemasukan (+)</option>
+      </select>
+      <button type="submit" id="btnSubmit" class="btn-submit">Simpan Transaksi</button>
+    </div>
   </form>
 
-  <h3 style="margin-bottom: 15px; font-size: 14px; letter-spacing: 1px; color: #94a3b8; text-transform: uppercase;">Riwayat Transaksi</h3>
-
-  <div style="overflow-x: auto;">
-    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+  <div class="section-title">Riwayat Transaksi</div>
+  <div class="table-container">
+    <table>
       <thead>
-        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: #94a3b8; font-size: 14px;">
-          <th style="padding: 10px 5px;">Tanggal</th>
-          <th style="padding: 10px 5px;">Keterangan</th>
-          <th style="padding: 10px 5px;">Jumlah</th>
-          <th style="padding: 10px 5px;">Aksi</th>
+        <tr>
+          <th>Tanggal</th>
+          <th>Keterangan</th>
+          <th>Jumlah</th>
+          <th style="text-align: center;">Aksi</th>
         </tr>
       </thead>
       <tbody id="tabelTransaksi">
