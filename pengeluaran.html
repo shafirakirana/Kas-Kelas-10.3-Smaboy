@@ -6,27 +6,28 @@
   <title>Keuangan Kelas</title>
   <link rel="stylesheet" href="kas_style.css">
   <link rel="stylesheet" href="kasbulanstyle.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body style="background: #0f172a; color: white; font-family: sans-serif; padding: 20px;">
 
   <a href="index.html" style="color: #94a3b8; text-decoration: none; font-size: 14px;">← Kembali</a>
 
   <h1 style="text-align: center; margin-top: 15px; margin-bottom: 5px;">KEUANGAN KELAS</h1>
-  <p style="text-align: center; color: #94a3b8; font-size: 14px; margin-bottom: 25px;">Arus Pemasukan & Pengeluaran Kas 10.3</p>
+  <p style="text-align: center; color: #94a3b8; font-size: 14px; margin-bottom: 25px;">Pemasukan & Pengeluaran Kas 10.3</p>
 
-  <!-- KARTU TOTAL SALDO -->
   <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 20px;">
     <span style="font-size: 12px; color: #94a3b8; letter-spacing: 1px; text-transform: uppercase;">Total Sisa Saldo Kas</span>
     <h2 id="statSaldoAkhir" style="font-size: 32px; margin: 10px 0 0 0; color: #fff;">Rp 0</h2>
   </div>
 
-  <!-- FORM TAMBAH TRANSAKSI (Gunakan ID formTransaksi) -->
   <form id="formTransaksi" style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 12px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1);">
     <h3 style="margin-top: 0; margin-bottom: 12px; font-size: 16px;">+ Tambah Transaksi Kas</h3>
     
-    <input type="text" id="keterangan" placeholder="Keterangan (misal: Beli Spidol)" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;" required>
+    <input type="text" id="keterangan" placeholder="Keperluan" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;" required>
     
-    <input type="number" id="nominal" placeholder="Nominal (misal: 15000)" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;" required>
+    <input type="number" id="nominal" placeholder="Nominal" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;" required>
     
     <select id="tipe" style="width: 100%; padding: 10px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;">
       <option value="pengeluaran">Pengeluaran (-)</option>
@@ -40,13 +41,12 @@
 
   <h3 style="margin-bottom: 15px; font-size: 14px; letter-spacing: 1px; color: #94a3b8; text-transform: uppercase;">Riwayat Transaksi</h3>
 
-  <!-- TABEL RIWAYAT TRANSAKSI -->
   <div style="overflow-x: auto;">
     <table style="width: 100%; border-collapse: collapse; text-align: left;">
       <thead>
         <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: #94a3b8; font-size: 14px;">
-          <th style="padding: 10px 5px;">Tgl</th>
-          <th style="padding: 10px 5px;">Ket</th>
+          <th style="padding: 10px 5px;">Tanggal</th>
+          <th style="padding: 10px 5px;">Keterangan</th>
           <th style="padding: 10px 5px;">Jumlah</th>
         </tr>
       </thead>
