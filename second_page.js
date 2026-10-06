@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // 1. Konfigurasi Firebase
   const firebaseConfig = {
     apiKey: "AIzaSyD0o1p4qJ5DNDHg3-DRN32",
     authDomain: "kas-kelas-smaboy.firebaseapp.com",
@@ -21,39 +22,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const selectTipe = document.getElementById('tipe');
   const tabelTransaksi = document.getElementById('tabelTransaksi');
 
-  // Mengambil status bendahara dari localStorage (sama seperti di keuangan.js)
+  // Cek apakah user adalah bendahara dari localStorage
   const isBendahara = localStorage.getItem('isBendahara') === 'true';
 
-  // Tampilkan atau sembunyikan form berdasarkan status bendahara
+  // ATUR TAMPILAN FORM: Hanya bendahara yang bisa lihat form tambah transaksi
   if (formTransaksi) {
     if (isBendahara) {
       formTransaksi.style.display = 'block';
     } else {
-      formTransaksi.style.display = 'none';
+      formTransaksi.style.display = 'none'; // Sembunyikan jika bukan bendahara
     }
   }
 
-  // Muat data transaksi secara langsung
+  // Langsung muat data agar siswa/bendahara bisa lihat riwayat transaksi
   muatDataTransaksi();
 
-  // 2. Simpan Transaksi ke Firebase
+  // 2. Simpan Transaksi (Hanya Bendahara)
   if (formTransaksi) {
     formTransaksi.addEventListener('submit', (e) => {
       e.preventDefault();
 
       if (!isBendahara) {
-        if (typeof Swal !== 'undefined') {
-          Swal.fire({
-            icon: 'error',
-            title: 'Akses Ditolak',
-            text: 'Hanya bendahara yang dapat menambah transaksi!',
-            background: '#1e1e1e',
-            color: '#fff',
-            confirmButtonColor: '#dc2626'
-          });
-        } else {
-          alert('Hanya bendahara yang dapat menambah transaksi!');
-        }
+        alert('Akses ditolak! Hanya bendahara yang dapat menambah transaksi.');
         return;
       }
 
@@ -80,25 +70,14 @@ document.addEventListener('DOMContentLoaded', () => {
               background: '#1e1e1e',
               color: '#fff',
               confirmButtonColor: '#2563eb',
-              timer: 2000,
+              timer: 1500,
               showConfirmButton: false
             });
           } else {
             alert('Transaksi berhasil disimpan!');
           }
         }).catch((err) => {
-          if (typeof Swal !== 'undefined') {
-            Swal.fire({
-              icon: 'error',
-              title: 'Gagal!',
-              text: 'Gagal menyimpan data: ' + err.message,
-              background: '#1e1e1e',
-              color: '#fff',
-              confirmButtonColor: '#dc2626'
-            });
-          } else {
-            alert('Gagal menyimpan data: ' + err.message);
-          }
+          alert('Gagal menyimpan data: ' + err.message);
         });
       }
     });
@@ -106,36 +85,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 3. Muat Data Transaksi secara Realtime
   function muatDataTransaksi() {
-    database.ref('transaksi_kas').orderByChild('timestamp').on('value', (snapshot) => {
+    database.ref('transaksi_kas').on('value', (snapshot) => {
       if (!tabelTransaksi) return;
 
       tabelTransaksi.innerHTML = '';
       let totalPemasukan = 0;
       let totalPengeluaran = 0;
 
+      if (!snapshot.exists()) {
+        tabelTransaksi.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:15px; color:#aaa;">Belum ada data transaksi</td></tr>';
+        updateSaldo(0);
+        return;
+      }
+
       snapshot.forEach((childSnapshot) => {
         const data = childSnapshot.val();
         const key = childSnapshot.key;
 
-        if (data.tipe === 'pemasukan') {
-          totalPemasukan += data.nominal;
+        const nominal = parseInt(data.nominal) || 0;
+        const tipe = data.tipe || 'pemasukan';
+        const keterangan = data.keterangan || '-';
+        const tanggal = data.tanggal || '-';
+
+        if (tipe === 'pemasukan') {
+          totalPemasukan += nominal;
         } else {
-          totalPengeluaran += data.nominal;
+          totalPengeluaran += nominal;
         }
 
         const row = document.createElement('tr');
         row.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
 
-        // Tombol Hapus hanya ditampilkan jika status isBendahara = true
+        // Tombol Hapus HANYA muncul jika isBendahara = true
         const tombolHapus = isBendahara 
           ? `<button onclick="hapusTransaksi('${key}')" style="background:#dc2626; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-size:12px;">Hapus</button>` 
           : '';
 
         row.innerHTML = `
-          <td style="padding: 10px 5px; font-size: 13px;">${data.tanggal}</td>
-          <td style="padding: 10px 5px; font-size: 13px;">${data.keterangan}</td>
-          <td style="padding: 10px 5px; font-size: 13px; color: ${data.tipe === 'pemasukan' ? '#4CAF50' : '#F44336'};">
-            ${data.tipe === 'pemasukan' ? '+' : '-'} Rp ${data.nominal.toLocaleString('id-ID')}
+          <td style="padding: 10px 5px; font-size: 13px;">${tanggal}</td>
+          <td style="padding: 10px 5px; font-size: 13px;">${keterangan}</td>
+          <td style="padding: 10px 5px; font-size: 13px; color: ${tipe === 'pemasukan' ? '#4CAF50' : '#F44336'};">
+            ${tipe === 'pemasukan' ? '+' : '-'} Rp ${nominal.toLocaleString('id-ID')}
           </td>
           <td style="padding: 10px 5px;">${tombolHapus}</td>
         `;
@@ -143,64 +133,26 @@ document.addEventListener('DOMContentLoaded', () => {
         tabelTransaksi.appendChild(row);
       });
 
-      // Hitung Sisa Saldo
-      const elSaldoAkhir = document.getElementById('statSaldoAkhir');
-      if (elSaldoAkhir) {
-        const sisaSaldo = totalPemasukan - totalPengeluaran;
-        elSaldoAkhir.textContent = `Rp ${sisaSaldo.toLocaleString('id-ID')}`;
-      }
+      updateSaldo(totalPemasukan - totalPengeluaran);
     });
   }
 
-  // 4. Fungsi Hapus Transaksi (Global Window)
+  function updateSaldo(sisaSaldo) {
+    const elSaldoAkhir = document.getElementById('statSaldoAkhir');
+    if (elSaldoAkhir) {
+      elSaldoAkhir.textContent = `Rp ${sisaSaldo.toLocaleString('id-ID')}`;
+    }
+  }
+
+  // 4. Fungsi Hapus Transaksi (Hanya Bendahara)
   window.hapusTransaksi = (key) => {
     if (!isBendahara) {
-      if (typeof Swal !== 'undefined') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Akses Ditolak',
-          text: 'Hanya bendahara yang dapat menghapus transaksi.',
-          background: '#1e1e1e',
-          color: '#fff',
-          confirmButtonColor: '#dc2626'
-        });
-      } else {
-        alert('Hanya bendahara yang dapat menghapus transaksi.');
-      }
+      alert('Akses ditolak! Hanya bendahara yang dapat menghapus transaksi.');
       return;
     }
 
-    if (typeof Swal !== 'undefined') {
-      Swal.fire({
-        title: 'Hapus Transaksi?',
-        text: 'Data yang dihapus tidak bisa dikembalikan!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#dc2626',
-        cancelButtonColor: '#4b5563',
-        confirmButtonText: 'Ya, hapus!',
-        cancelButtonText: 'Batal',
-        background: '#1e1e1e',
-        color: '#fff'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          database.ref('transaksi_kas/' + key).remove().then(() => {
-            Swal.fire({
-              title: 'Terhapus!',
-              text: 'Transaksi berhasil dihapus.',
-              icon: 'success',
-              background: '#1e1e1e',
-              color: '#fff',
-              timer: 1500,
-              showConfirmButton: false
-            });
-          });
-        }
-      });
-    } else {
-      if (confirm('Yakin ingin menghapus transaksi ini?')) {
-        database.ref('transaksi_kas/' + key).remove();
-      }
+    if (confirm('Yakin ingin menghapus transaksi ini?')) {
+      database.ref('transaksi_kas/' + key).remove();
     }
   };
 });
