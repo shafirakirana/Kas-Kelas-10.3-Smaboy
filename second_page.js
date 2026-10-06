@@ -25,10 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let isBendahara = false;
 
+  // Sembunyikan form secara default sebelum validasi role
+  if (formTransaksi) {
+    formTransaksi.style.display = 'none';
+  }
+
   // 2. Cek Otentikasi & Hak Akses Bendahara
   auth.onAuthStateChanged((user) => {
     if (user) {
-      // Cek peran user di Realtime Database (misal disimpan di node /users/{uid}/role)
+      // Cek peran user di Realtime Database (/users/{uid}/role)
       database.ref('users/' + user.uid).once('value').then((snapshot) => {
         const userData = snapshot.val();
         if (userData && userData.role === 'bendahara') {
@@ -38,6 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
           isBendahara = false;
           if (formTransaksi) formTransaksi.style.display = 'none';
         }
+        muatDataTransaksi();
+      }).catch(() => {
+        isBendahara = false;
+        if (formTransaksi) formTransaksi.style.display = 'none';
         muatDataTransaksi();
       });
     } else {
@@ -53,7 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
 
       if (!isBendahara) {
-        alert('Akses ditolak! Hanya bendahara yang dapat menambah transaksi.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Akses Ditolak',
+          text: 'Hanya bendahara yang dapat menambah transaksi!',
+          background: '#1e1e1e',
+          color: '#fff',
+          confirmButtonColor: '#dc2626'
+        });
         return;
       }
 
@@ -72,9 +88,25 @@ document.addEventListener('DOMContentLoaded', () => {
           timestamp: Date.now()
         }).then(() => {
           formTransaksi.reset();
-          alert('Transaksi berhasil disimpan!');
+          Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: 'Transaksi berhasil disimpan',
+            background: '#1e1e1e',
+            color: '#fff',
+            confirmButtonColor: '#2563eb',
+            timer: 2000,
+            showConfirmButton: false
+          });
         }).catch((err) => {
-          alert('Gagal menyimpan data: ' + err.message);
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal!',
+            text: 'Gagal menyimpan data: ' + err.message,
+            background: '#1e1e1e',
+            color: '#fff',
+            confirmButtonColor: '#dc2626'
+          });
         });
       }
     });
@@ -104,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Tombol Hapus hanya ditampilkan jika user adalah Bendahara
         const tombolHapus = isBendahara 
-          ? `<button onclick="hapusTransaksi('${key}')" style="background:red; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">Hapus</button>` 
+          ? `<button onclick="hapusTransaksi('${key}')" style="background:#dc2626; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-size:12px;">Hapus</button>` 
           : '';
 
         row.innerHTML = `
@@ -131,12 +163,42 @@ document.addEventListener('DOMContentLoaded', () => {
   // 5. Fungsi Hapus Transaksi (Global Window)
   window.hapusTransaksi = (key) => {
     if (!isBendahara) {
-      alert('Akses ditolak! Hanya bendahara yang dapat menghapus transaksi.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Akses Ditolak',
+        text: 'Hanya bendahara yang dapat menghapus transaksi.',
+        background: '#1e1e1e',
+        color: '#fff',
+        confirmButtonColor: '#dc2626'
+      });
       return;
     }
 
-    if (confirm('Yakin ingin menghapus transaksi ini?')) {
-      database.ref('transaksi_kas/' + key).remove();
-    }
+    Swal.fire({
+      title: 'Hapus Transaksi?',
+      text: 'Data yang dihapus tidak bisa dikembalikan!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#dc2626',
+      cancelButtonColor: '#4b5563',
+      confirmButtonText: 'Ya, hapus!',
+      cancelButtonText: 'Batal',
+      background: '#1e1e1e',
+      color: '#fff'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        database.ref('transaksi_kas/' + key).remove().then(() => {
+          Swal.fire({
+            title: 'Terhapus!',
+            text: 'Transaksi berhasil dihapus.',
+            icon: 'success',
+            background: '#1e1e1e',
+            color: '#fff',
+            timer: 1500,
+            showConfirmButton: false
+          });
+        });
+      }
+    });
   };
 });
