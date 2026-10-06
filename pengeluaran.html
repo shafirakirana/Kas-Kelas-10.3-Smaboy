@@ -6,7 +6,7 @@
   <title>Keuangan Kelas</title>
   <link rel="stylesheet" href="kas_style.css">
   <link rel="stylesheet" href="kasbulanstyle.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -25,9 +25,9 @@
   <form id="formTransaksi" style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 12px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1);">
     <h3 style="margin-top: 0; margin-bottom: 12px; font-size: 16px;">+ Tambah Transaksi Kas</h3>
     
-    <input type="text" id="keterangan" placeholder="Keperluan" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;" required>
+    <input type="text" id="keterangan" placeholder="Keperluan" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;">
     
-    <input type="number" id="nominal" placeholder="Nominal" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;" required>
+    <input type="number" id="nominal" placeholder="Nominal" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;">
     
     <select id="tipe" style="width: 100%; padding: 10px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box;">
       <option value="pengeluaran">Pengeluaran (-)</option>
@@ -48,12 +48,14 @@
           <th style="padding: 10px 5px;">Tanggal</th>
           <th style="padding: 10px 5px;">Keterangan</th>
           <th style="padding: 10px 5px;">Jumlah</th>
+          <th style="padding: 10px 5px;">Aksi</th>
         </tr>
       </thead>
       <tbody id="tabelTransaksi">
       </tbody>
     </table>
   </div>
+
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <script src="second_page.js"></script>
